@@ -32,9 +32,10 @@ Application.prototype.start = function () {
     }
   };
 
-  this.tuner.init();
-  this.frequencyData = new Uint8Array(this.tuner.analyser.frequencyBinCount);
-  this.ensureAudioContext();
+  swal.fire("Welcome to online tuner!").then(function () {
+    self.tuner.init();
+    self.frequencyData = new Uint8Array(self.tuner.analyser.frequencyBinCount);
+  });
 
   this.$a4.addEventListener("click", function () {
     swal
@@ -63,30 +64,6 @@ Application.prototype.start = function () {
   document.querySelector(".auto input").addEventListener("change", () => {
     this.notes.toggleAutoMode();
   });
-};
-
-Application.prototype.ensureAudioContext = function () {
-  if (!this.tuner.audioContext) {
-    return;
-  }
-
-  const resume = () => {
-    this.tuner.audioContext.resume().finally(() => {
-      if (this.tuner.audioContext.state === "running") {
-        document.body.removeEventListener("pointerdown", resume);
-        document.body.removeEventListener("touchstart", resume);
-        document.body.removeEventListener("keydown", resume);
-      }
-    });
-  };
-
-  resume();
-
-  if (this.tuner.audioContext.state !== "running") {
-    document.body.addEventListener("pointerdown", resume);
-    document.body.addEventListener("touchstart", resume);
-    document.body.addEventListener("keydown", resume);
-  }
 };
 
 Application.prototype.updateFrequencyBars = function () {
