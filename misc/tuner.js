@@ -18,6 +18,10 @@ const Tuner = function (a4) {
   ];
 
   this.initGetUserMedia();
+  this.stream = null;
+  this.source = null;
+  this.handleAudioProcess = null;
+  this.initPromise = null;
 };
 
 Tuner.prototype.initGetUserMedia = function () {
@@ -54,15 +58,57 @@ Tuner.prototype.initGetUserMedia = function () {
   }
 };
 
+Tuner.prototype.init = function () {
+  if (this.initPromise) {
+    return this.initPromise;
+  }
+  this.audioContext = new window.AudioContext();
+  this.analyser = this.audioContext.createAnalyser();
+  this.scriptProcessor = this.audioContext.createScriptProcessor(
+    this.bufferSize,
+    1,
+    1
+  );
+
+  const self = this;
+
+  this.initPromise = aubio().then(function (aubio) {
+    self.pitchDetector = new aubio.Pitch(
+      "default",
+      self.bufferSize,
+      1,
+      self.audioContext.sampleRate
+    );
+  });
+
+  return this.initPromise;
+};
+
+Tuner.prototype.start = function () {
+  const self = this;
+  return this.init().then(function () {
+    if (self.stream) {
+      if (self.audioContext && self.audioContext.state === "suspended") {
+        return self.audioContext.resume();
+      }
+      return Promise.resolve();
+    }
+    return self.startRecord();
+  });
+};
+
 Tuner.prototype.startRecord = function () {
   const self = this;
-  navigator.mediaDevices
-    .getUserMedia({ audio: true })
-    .then(function (stream) {
-      self.audioContext.createMediaStreamSource(stream).connect(self.analyser);
+  return navigator.mediaDevices.getUserMedia({ audio: true }).then(function (
+    stream
+  ) {
+    self.stream = stream;
+    const connect = function () {
+      self.source = self.audioContext.createMediaStreamSource(stream);
+      self.source.connect(self.analyser);
       self.analyser.connect(self.scriptProcessor);
       self.scriptProcessor.connect(self.audioContext.destination);
-      self.scriptProcessor.addEventListener("audioprocess", function (event) {
+      self.handleAudioProcess = function (event) {
         const frequency = self.pitchDetector.do(
           event.inputBuffer.getChannelData(0)
         );
@@ -76,33 +122,50 @@ Tuner.prototype.startRecord = function () {
             frequency: frequency,
           });
         }
+      };
+      self.scriptProcessor.addEventListener(
+        "audioprocess",
+        self.handleAudioProcess
+      );
+    };
+
+    if (self.audioContext.state === "suspended") {
+      return self.audioContext.resume().then(function () {
+        connect();
       });
-    })
-    .catch(function (error) {
-      alert(error.name + ": " + error.message);
-    });
+    }
+    connect();
+  });
 };
 
-Tuner.prototype.init = function () {
-  this.audioContext = new window.AudioContext();
-  this.analyser = this.audioContext.createAnalyser();
-  this.scriptProcessor = this.audioContext.createScriptProcessor(
-    this.bufferSize,
-    1,
-    1
-  );
-
-  const self = this;
-
-  aubio().then(function (aubio) {
-    self.pitchDetector = new aubio.Pitch(
-      "default",
-      self.bufferSize,
-      1,
-      self.audioContext.sampleRate
+Tuner.prototype.stop = function () {
+  if (this.handleAudioProcess && this.scriptProcessor) {
+    this.scriptProcessor.removeEventListener(
+      "audioprocess",
+      this.handleAudioProcess
     );
-    self.startRecord();
-  });
+    this.handleAudioProcess = null;
+  }
+  if (this.scriptProcessor) {
+    this.scriptProcessor.disconnect();
+  }
+  if (this.analyser) {
+    this.analyser.disconnect();
+  }
+  if (this.source) {
+    this.source.disconnect();
+    this.source = null;
+  }
+  if (this.stream) {
+    this.stream.getTracks().forEach(function (track) {
+      track.stop();
+    });
+    this.stream = null;
+  }
+  if (this.audioContext && this.audioContext.state !== "closed") {
+    this.audioContext.suspend();
+  }
+  this.stopOscillator();
 };
 
 /**
