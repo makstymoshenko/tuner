@@ -5,14 +5,14 @@
 }
 
 :root {
-  --bg-dark: #03060a;
-  --panel-dark: #0e141c;
-  --panel-light: #111b29;
-  --accent: #00d0ff;
-  --accent-muted: rgba(0, 208, 255, 0.2);
-  --text-main: #f4fbff;
-  --text-muted: #94a3b8;
-  --card-border: rgba(255, 255, 255, 0.08);
+  --bg-dark: #1a1d21;
+  --panel-dark: #1f2329;
+  --panel-light: #2a2f36;
+  --accent: #00a8ff;
+  --accent-muted: rgba(0, 168, 255, 0.25);
+  --text-main: #f2f5f7;
+  --text-muted: #8d96a8;
+  --card-border: rgba(255, 255, 255, 0.05);
 }
 
 html,
@@ -24,7 +24,7 @@ body {
   margin: 0;
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
   color: var(--text-main);
-  background: radial-gradient(circle at 20% 20%, #1d2b45, #05060a 70%);
+  background: linear-gradient(145deg, #111318, var(--bg-dark) 70%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,7 +105,7 @@ body {
 }
 
 .tuner-toggle.is-active {
-  box-shadow: 0 0 30px rgba(0, 208, 255, 0.5);
+  box-shadow: 0 0 30px rgba(0, 168, 255, 0.55);
 }
 
 .tuner-toggle:disabled {
@@ -114,7 +114,7 @@ body {
 }
 
 .note-display {
-  background: rgba(3, 6, 10, 0.55);
+  background: rgba(22, 26, 32, 0.9);
   border-radius: 22px;
   padding: 24px;
   border: 1px solid var(--card-border);
@@ -150,7 +150,7 @@ body {
 .note.active {
   color: var(--text-main);
   transform: translateY(-6px) scale(1.05);
-  text-shadow: 0 10px 30px rgba(0, 208, 255, 0.35);
+  text-shadow: 0 10px 30px rgba(0, 168, 255, 0.4);
 }
 
 .note span {
@@ -187,7 +187,7 @@ body {
 
 .meter-wrap {
   padding: 18px 12px 8px;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(21, 24, 30, 0.8);
   border-radius: 20px;
   border: 1px solid var(--card-border);
 }
@@ -208,7 +208,7 @@ body {
   position: absolute;
   bottom: 25px;
   left: 50%;
-  box-shadow: 0 15px 35px rgba(0, 208, 255, 0.55);
+  box-shadow: 0 15px 35px rgba(0, 168, 255, 0.55);
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -250,7 +250,7 @@ body {
   font-size: 16px;
   color: var(--text-muted);
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
   padding: 10px 18px;
   border-radius: 999px;
   transition: color 0.2s ease, background 0.2s ease;
@@ -262,7 +262,7 @@ body {
 }
 
 .a4:hover {
-  background: rgba(0, 208, 255, 0.15);
+  background: rgba(0, 168, 255, 0.15);
 }
 
 @media (max-width: 768px) {
