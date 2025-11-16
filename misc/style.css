@@ -126,11 +126,11 @@ body {
 }
 
 .notes-list {
-  display: inline-flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 6px 10px 16px;
-  scrollbar-width: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 24px;
+  padding: 12px 10px 20px;
 }
 
 .notes-list::-webkit-scrollbar {
@@ -153,6 +153,16 @@ body {
   text-shadow: 0 10px 30px rgba(0, 168, 255, 0.4);
 }
 
+.note-prev,
+.note-next {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 32px;
+}
+
+.note-current {
+  font-size: clamp(56px, 8vw, 96px);
+}
+
 .note span {
   position: absolute;
   right: 6px;
@@ -173,16 +183,47 @@ body {
 }
 
 .frequency {
+  margin-top: 6px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
+}
+
+.frequency-value {
   font-size: clamp(48px, 7vw, 72px);
   font-weight: 600;
-  margin-top: 6px;
   line-height: 1;
 }
 
-.frequency span {
+.frequency-unit {
   font-size: 36%;
-  margin-left: 12px;
   color: var(--text-muted);
+}
+
+.cents {
+  margin-top: 4px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-muted);
+}
+
+.cents-value {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--text-main);
+  min-width: 64px;
+  text-align: right;
+}
+
+.cents-value.is-flat {
+  color: #ff7b5f;
+}
+
+.cents-value.is-sharp {
+  color: var(--accent);
 }
 
 .meter-wrap {
