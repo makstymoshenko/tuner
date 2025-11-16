@@ -10,22 +10,53 @@
     <link rel="stylesheet" href="misc/style.css" />
   </head>
   <body>
-    <canvas class="frequency-bars"></canvas>
-    <div class="meter">
-      <div class="meter-dot"></div>
-      <div class="meter-pointer"></div>
-    </div>
-    <div class="notes">
-      <div class="notes-list"></div>
-      <div class="frequency">
-        <span>Hz</span>
+    <div class="tuner-page">
+      <div class="tuner-container">
+        <header class="tuner-header">
+          <p class="eyebrow">Professional chromatic tuner</p>
+          <h1>WEB TUNER PRO</h1>
+          <p class="subhead">
+            Monitor your pitch in real time with a sleek studio dashboard.
+          </p>
+        </header>
+        <div class="tuner-panel">
+          <div class="visualizer">
+            <canvas class="frequency-bars" aria-hidden="true"></canvas>
+          </div>
+          <div class="panel-body">
+            <div class="panel-status">
+              <button class="tuner-toggle" type="button" disabled>
+                Start / Stop Tuner
+              </button>
+              <span class="status-text">Live input active</span>
+            </div>
+            <div class="note-display">
+              <div class="notes">
+                <div class="notes-list"></div>
+                <div class="frequency">
+                  <span>Hz</span>
+                </div>
+              </div>
+            </div>
+            <div class="meter-wrap">
+              <div class="meter">
+                <div class="meter-dot"></div>
+                <div class="meter-pointer"></div>
+              </div>
+            </div>
+            <div class="panel-controls">
+              <div class="a4">
+                A<sub>4</sub> = <span>440</span> Hz
+              </div>
+              <label class="auto">
+                Auto
+                <input type="checkbox" checked />
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="a4">A<sub>4</sub> = <span>440</span> Hz</div>
-    <label class="auto">
-      Auto
-      <input type="checkbox" checked />
-    </label>
     <script src="misc/sweetalert2.all.min.js"></script>
     <script src="misc/aubio.min.js"></script>
     <script src="misc/tuner.js"></script>
