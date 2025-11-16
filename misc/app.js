@@ -21,7 +21,6 @@ Application.prototype.initA4 = function () {
 
 Application.prototype.start = function () {
   this.$toggle = document.querySelector(".tuner-toggle");
-  this.$status = document.querySelector(".status-text");
 
   this.tuner.onNoteDetected = (note) => {
     if (this.notes.isAutoMode) {
@@ -64,7 +63,6 @@ Application.prototype.start = function () {
   });
 
   this.updateToggleButton();
-  this.setStatus("Idle");
 };
 
 Application.prototype.update = function (note) {
@@ -77,17 +75,14 @@ Application.prototype.startTuner = function () {
     return;
   }
   this.$toggle.disabled = true;
-  this.setStatus("Starting...");
   this.tuner
     .start()
     .then(() => {
       this.isRunning = true;
       this.updateToggleButton();
-      this.setStatus("Running");
     })
     .catch((error) => {
       const message = error && error.message ? error.message : String(error);
-      this.setStatus("Microphone error");
       swal.fire("Microphone access error", message, "error");
     })
     .finally(() => {
@@ -102,7 +97,6 @@ Application.prototype.stopTuner = function () {
   this.tuner.stop();
   this.isRunning = false;
   this.updateToggleButton();
-  this.setStatus("Stopped");
 };
 
 Application.prototype.updateToggleButton = function () {
@@ -115,12 +109,6 @@ Application.prototype.updateToggleButton = function () {
   } else {
     this.$toggle.textContent = "Start Tuner";
     this.$toggle.classList.remove("is-active");
-  }
-};
-
-Application.prototype.setStatus = function (text) {
-  if (this.$status) {
-    this.$status.textContent = "Status: " + text;
   }
 };
 

@@ -87,8 +87,7 @@ body {
 .panel-status {
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .tuner-toggle {
@@ -112,11 +111,6 @@ body {
 .tuner-toggle:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.status-text {
-  font-size: 15px;
-  color: var(--text-muted);
 }
 
 .note-display {
