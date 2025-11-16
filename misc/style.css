@@ -76,16 +76,7 @@ body {
 }
 
 .visualizer {
-  position: absolute;
-  inset: 0;
-  opacity: 0.45;
-}
-
-.frequency-bars {
-  width: 100%;
-  height: 100%;
-  display: block;
-  filter: blur(1px) saturate(160%);
+  display: none;
 }
 
 .panel-body {
