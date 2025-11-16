@@ -75,9 +75,6 @@ body {
   overflow: hidden;
 }
 
-.visualizer {
-  display: none;
-}
 
 .panel-body {
   position: relative;
