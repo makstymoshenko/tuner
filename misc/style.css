@@ -24,7 +24,7 @@ body {
   margin: 0;
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
   color: var(--text-main);
-  background: linear-gradient(145deg, #111318, var(--bg-dark) 70%);
+  background: #111318;
   display: flex;
   align-items: center;
   justify-content: center;
