@@ -96,6 +96,44 @@ body {
   padding-bottom: 32px;
 }
 
+/* Centered blurred halo circle */
+#note-circle {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 6;
+  background: #111318; /* same as body background by default */
+  filter: blur(28px);
+  transition: background-color 180ms ease, box-shadow 180ms ease, opacity 220ms ease, transform 220ms ease;
+  opacity: 0.95;
+  box-shadow: 0 0 0 0 rgba(0,0,0,0);
+  backdrop-filter: blur(4px);
+}
+
+/* States: closest (very close), near (not very), far (like background) */
+#note-circle.halo-closest {
+  background-color: rgba(188, 255, 200, 0.9);
+  box-shadow: 0 0 120px 40px rgba(188, 255, 200, 0.22);
+  transform: translate(-50%, -50%) scale(1.02);
+}
+
+#note-circle.halo-near {
+  background-color: rgba(255, 250, 200, 0.85);
+  box-shadow: 0 0 90px 30px rgba(255, 250, 200, 0.18);
+  transform: translate(-50%, -50%) scale(1.01);
+}
+
+#note-circle.halo-far {
+  background-color: #111318; /* match current background */
+  box-shadow: 0 0 0 0 rgba(0,0,0,0);
+  opacity: 0.9;
+}
+
 .panel-status {
   display: flex;
   align-items: center;
