@@ -14,9 +14,11 @@ const Application = function () {
 };
 
 Application.prototype.initA4 = function () {
-  this.$a4 = document.querySelector(".a4 span");
+  this.$a4Display = document.querySelector(".a4-display");
   this.a4 = parseInt(localStorage.getItem("a4")) || 440;
-  this.$a4.innerHTML = this.a4;
+  this.$a4Display.innerHTML = this.a4;
+  this.a4Min = 415;
+  this.a4Max = 466;
 };
 
 Application.prototype.start = function () {
@@ -30,27 +32,39 @@ Application.prototype.start = function () {
     }
   };
 
-  this.$a4.addEventListener("click", (e) => {
+  // Обробники для кнопок збільшення/зменшення A4
+  const $decreaseBtn = document.querySelector(".a4-decrease");
+  const $increaseBtn = document.querySelector(".a4-increase");
+
+  const updateA4 = (newValue) => {
+    // Обмежуємо значення в межах min/max
+    if (newValue < this.a4Min) newValue = this.a4Min;
+    if (newValue > this.a4Max) newValue = this.a4Max;
+
+    if (newValue === this.a4) return;
+
+    this.a4 = newValue;
+    this.$a4Display.innerHTML = this.a4;
+    this.tuner.middleA = this.a4;
+    this.notes.createNotes();
+    this.update({
+      name: "A",
+      frequency: this.a4,
+      octave: 4,
+      value: 69,
+      cents: 0,
+    });
+    localStorage.setItem("a4", this.a4);
+  };
+
+  $decreaseBtn.addEventListener("click", (e) => {
     e.stopPropagation();
-    swal
-      .fire({ input: "number", inputValue: this.a4 })
-      .then(({ value: a4 }) => {
-        if (!parseInt(a4) || a4 === this.a4) {
-          return;
-        }
-        this.a4 = a4;
-        this.$a4.innerHTML = a4;
-        this.tuner.middleA = a4;
-        this.notes.createNotes();
-        this.update({
-          name: "A",
-          frequency: this.a4,
-          octave: 4,
-          value: 69,
-          cents: 0,
-        });
-        localStorage.setItem("a4", a4);
-      });
+    updateA4(this.a4 - 1);
+  });
+
+  $increaseBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    updateA4(this.a4 + 1);
   });
 
   // Обробник клику/тапу по всьому екрану для включення/виключення тюнера
@@ -63,6 +77,10 @@ Application.prototype.start = function () {
   };
 
   document.addEventListener("click", (e) => {
+    // Ігноруємо клік на кнопки A4
+    if (e.target.classList.contains("a4-btn") || e.target.closest(".a4-control")) {
+      return;
+    }
     // Ігноруємо клік на елементи діалогів та модальних вікон
     if (document.querySelector(".swal2-container")) {
       return;
@@ -71,6 +89,10 @@ Application.prototype.start = function () {
   });
 
   document.addEventListener("touchstart", (e) => {
+    // Ігноруємо тап на кнопки A4
+    if (e.target.classList.contains("a4-btn") || e.target.closest(".a4-control")) {
+      return;
+    }
     // Ігноруємо тап на елементи діалогів та модальних вікон
     if (document.querySelector(".swal2-container")) {
       return;

@@ -311,6 +311,47 @@ body {
   background: rgba(0, 168, 255, 0.15);
 }
 
+.a4-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.a4-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--accent);
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.a4-btn:hover {
+  background: var(--accent-muted);
+}
+
+.a4-btn:active {
+  transform: scale(0.95);
+}
+
+.a4-value {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.a4-display {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   body {
     padding: 16px;
