@@ -20,8 +20,6 @@ Application.prototype.initA4 = function () {
 };
 
 Application.prototype.start = function () {
-  this.$toggle = document.querySelector(".tuner-toggle");
-
   this.tuner.onNoteDetected = (note) => {
     if (this.notes.isAutoMode) {
       if (this.lastNote === note.name) {
@@ -31,14 +29,6 @@ Application.prototype.start = function () {
       }
     }
   };
-
-  this.$toggle.addEventListener("click", () => {
-    if (this.isRunning) {
-      this.stopTuner();
-    } else {
-      this.startTuner();
-    }
-  });
 
   this.$a4.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -73,10 +63,6 @@ Application.prototype.start = function () {
   };
 
   document.addEventListener("click", (e) => {
-    // Ігноруємо клік на саму кнопку, так як вона має свій обробник
-    if (e.target === this.$toggle || this.$toggle.contains(e.target)) {
-      return;
-    }
     // Ігноруємо клік на елементи діалогів та модальних вікон
     if (document.querySelector(".swal2-container")) {
       return;
@@ -85,10 +71,6 @@ Application.prototype.start = function () {
   });
 
   document.addEventListener("touchstart", (e) => {
-    // Ігноруємо тап на саму кнопку
-    if (e.target === this.$toggle || this.$toggle.contains(e.target)) {
-      return;
-    }
     // Ігноруємо тап на елементи діалогів та модальних вікон
     if (document.querySelector(".swal2-container")) {
       return;
@@ -108,19 +90,14 @@ Application.prototype.startTuner = function () {
   if (this.isRunning) {
     return;
   }
-  this.$toggle.disabled = true;
   this.tuner
     .start()
     .then(() => {
       this.isRunning = true;
-      this.updateToggleButton();
     })
     .catch((error) => {
       const message = error && error.message ? error.message : String(error);
       swal.fire("Microphone access error", message, "error");
-    })
-    .finally(() => {
-      this.$toggle.disabled = false;
     });
 };
 
@@ -130,20 +107,6 @@ Application.prototype.stopTuner = function () {
   }
   this.tuner.stop();
   this.isRunning = false;
-  this.updateToggleButton();
-};
-
-Application.prototype.updateToggleButton = function () {
-  if (!this.$toggle) {
-    return;
-  }
-  if (this.isRunning) {
-    this.$toggle.textContent = "Stop Tuner";
-    this.$toggle.classList.add("is-active");
-  } else {
-    this.$toggle.textContent = "Start Tuner";
-    this.$toggle.classList.remove("is-active");
-  }
 };
 
 const app = new Application();
