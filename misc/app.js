@@ -40,7 +40,8 @@ Application.prototype.start = function () {
     }
   });
 
-  this.$a4.addEventListener("click", () => {
+  this.$a4.addEventListener("click", (e) => {
+    e.stopPropagation();
     swal
       .fire({ input: "number", inputValue: this.a4 })
       .then(({ value: a4 }) => {
@@ -60,6 +61,39 @@ Application.prototype.start = function () {
         });
         localStorage.setItem("a4", a4);
       });
+  });
+
+  // Обробник клику/тапу по всьому екрану для включення/виключення тюнера
+  const handleToggleTuner = () => {
+    if (this.isRunning) {
+      this.stopTuner();
+    } else {
+      this.startTuner();
+    }
+  };
+
+  document.addEventListener("click", (e) => {
+    // Ігноруємо клік на саму кнопку, так як вона має свій обробник
+    if (e.target === this.$toggle || this.$toggle.contains(e.target)) {
+      return;
+    }
+    // Ігноруємо клік на елементи діалогів та модальних вікон
+    if (document.querySelector(".swal2-container")) {
+      return;
+    }
+    handleToggleTuner();
+  });
+
+  document.addEventListener("touchstart", (e) => {
+    // Ігноруємо тап на саму кнопку
+    if (e.target === this.$toggle || this.$toggle.contains(e.target)) {
+      return;
+    }
+    // Ігноруємо тап на елементи діалогів та модальних вікон
+    if (document.querySelector(".swal2-container")) {
+      return;
+    }
+    handleToggleTuner();
   });
 
   this.updateToggleButton();
