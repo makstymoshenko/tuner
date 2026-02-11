@@ -35,10 +35,8 @@ Notes.prototype.createNotes = function () {
     }
   }
 
-  this.$prev = this.createNoteSlot("prev");
   this.$current = this.createNoteSlot("current");
-  this.$next = this.createNoteSlot("next");
-  this.$notes = [this.$prev, this.$current, this.$next];
+  this.$notes = [this.$current];
 
   const self = this;
   this.$notes.forEach(function ($note) {
@@ -121,13 +119,9 @@ Notes.prototype.update = function (note) {
   }
 
   const index = this.noteIndexMap[value];
-  const prevData = this.noteData[index - 1];
   const currentData = this.noteData[index];
-  const nextData = this.noteData[index + 1];
 
-  this.renderNote(this.$prev, prevData);
   this.renderNote(this.$current, currentData);
-  this.renderNote(this.$next, nextData);
   this.active(this.$current);
 
   if (this.$frequencyValue) {
