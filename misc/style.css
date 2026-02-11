@@ -48,9 +48,9 @@ body {
 }
 
 .tuner-container {
-  background: linear-gradient(135deg, var(--panel-light), var(--panel-dark));
+  /* background: linear-gradient(135deg, var(--panel-light), var(--panel-dark)); */
   /* border-radius: 28px; */
-  border: 1px solid var(--card-border);
+  /* border: 1px solid var(--card-border); */
   /* box-shadow: 0 35px 90px rgba(0, 0, 0, 0.45); */
   overflow: hidden;
 }
