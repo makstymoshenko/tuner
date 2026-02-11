@@ -318,20 +318,36 @@ body {
   gap: 16px;
 }
 
+.a4-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: 32px;
+}
+
 .a4-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  flex: 1;
+  width: 32px;
   border: 2px solid var(--accent);
-  border-radius: 50%;
   background: transparent;
   color: var(--accent);
-  font-size: 20px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.2s ease;
+  padding: 0;
+}
+
+.a4-btn:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+.a4-btn:last-child {
+  border-radius: 0 0 4px 4px;
+  border-top: 1px solid var(--accent);
 }
 
 .a4-btn:hover {
@@ -345,6 +361,7 @@ body {
 .a4-value {
   color: var(--text-muted);
   white-space: nowrap;
+  font-size: 16px;
 }
 
 .a4-display {
