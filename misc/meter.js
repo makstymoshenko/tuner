@@ -4,25 +4,14 @@
  */
 const Meter = function (selector) {
   this.$root = document.querySelector(selector);
-  this.$pointer = this.$root.querySelector(".meter-pointer");
-  this.init();
-};
-
-Meter.prototype.init = function () {
-  for (var i = 0; i <= 10; i += 1) {
-    const $scale = document.createElement("div");
-    $scale.className = "meter-scale";
-    $scale.style.transform = "rotate(" + (i * 9 - 45) + "deg)";
-    if (i % 5 === 0) {
-      $scale.classList.add("meter-scale-strong");
-    }
-    this.$root.appendChild($scale);
-  }
+  this.$progress = this.$root.querySelector(".meter-line-progress");
 };
 
 /**
- * @param {number} deg
+ * @param {number} percentage - значення від -45 до 45 (переводимо в 0-100%)
  */
-Meter.prototype.update = function (deg) {
-  this.$pointer.style.transform = "rotate(" + deg + "deg)";
+Meter.prototype.update = function (percentage) {
+  // Переводимо від -45 до 45 градусів у 0-100%
+  const normalizedValue = (percentage + 45) / 90 * 100;
+  this.$progress.style.width = normalizedValue + "%";
 };
