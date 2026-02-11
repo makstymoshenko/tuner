@@ -108,20 +108,18 @@ Application.prototype.update = function (note) {
   this.meter.update((note.cents / 50) * 45);
   // Update centered blurred halo color based on proximity (cents)
   try {
-    const halo = document.getElementById("note-circle");
-    if (halo) {
-      const centsAbs = Math.abs(note.cents || 0);
-      halo.classList.remove("halo-closest", "halo-near", "halo-far");
-      if (centsAbs <= 3) {
-        halo.classList.add("halo-closest");
-      } else if (centsAbs <= 15) {
-        halo.classList.add("halo-near");
-      } else {
-        halo.classList.add("halo-far");
-      }
+    const body = document.body;
+    const centsAbs = Math.abs(note.cents || 0);
+    body.classList.remove("halo-closest", "halo-near", "halo-far");
+    if (centsAbs <= 3) {
+      body.classList.add("halo-closest");
+    } else if (centsAbs <= 15) {
+      body.classList.add("halo-near");
+    } else {
+      body.classList.add("halo-far");
     }
   } catch (e) {
-    // silent fail — UI should still work
+    // ignore
   }
 };
 
