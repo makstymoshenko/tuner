@@ -51,7 +51,7 @@ body {
   background: linear-gradient(135deg, var(--panel-light), var(--panel-dark));
   /* border-radius: 28px; */
   border: 1px solid var(--card-border);
-  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.45);
+  /* box-shadow: 0 35px 90px rgba(0, 0, 0, 0.45); */
   overflow: hidden;
 }
 
@@ -262,7 +262,7 @@ body {
   background: linear-gradient(90deg, var(--accent), rgba(0, 168, 255, 0.7));
   border-radius: 12px;
   transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-  /* box-shadow: 0 0 20px rgba(0, 168, 255, 0.6); */
+  box-shadow: 0 0 20px rgba(0, 168, 255, 0.6);
 }
 
 .panel-controls {
