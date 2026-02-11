@@ -36,6 +36,15 @@ body {
   cursor: default;
 }
 
+.bottom {
+  position: bottom;
+  bottom: 16px;
+  left: 50%;
+  height: 25%;
+  color: red;
+  z-index: 9999;
+}
+
 .tuner-page {
 
   width: 100%;
