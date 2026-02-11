@@ -240,9 +240,9 @@ body {
 
 .meter-wrap {
   padding: 18px 12px 8px;
-  background: rgba(21, 24, 30, 0.8);
-  border-radius: 20px;
-  border: 1px solid var(--card-border);
+  /* background: rgba(21, 24, 30, 0.8); */
+  /* border-radius: 20px; */
+  /* border: 1px solid var(--card-border); */
 }
 
 .meter {
