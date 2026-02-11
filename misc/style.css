@@ -249,7 +249,7 @@ body.halo-far {
 }
 
 .frequency-unit {
-  font-size: 36%;
+  /* font-size: 36%; */
   color: var(--text-muted);
 }
 
