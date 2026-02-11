@@ -4,8 +4,6 @@ const Application = function () {
   this.notes = new Notes(".notes", this.tuner);
   this.meter = new Meter(".meter");
   this.isRunning = false;
-  this.overlay = document.getElementById('tuner-overlay');
-  if (this.overlay) this.overlay.classList.remove('hidden');
   this.update({
     name: "A",
     frequency: this.a4,
@@ -118,7 +116,6 @@ Application.prototype.startTuner = function () {
     .start()
     .then(() => {
       this.isRunning = true;
-      if (this.overlay) this.overlay.classList.add('hidden');
     })
     .catch((error) => {
       const message = error && error.message ? error.message : String(error);
@@ -132,7 +129,6 @@ Application.prototype.stopTuner = function () {
   }
   this.tuner.stop();
   this.isRunning = false;
-  if (this.overlay) this.overlay.classList.remove('hidden');
 };
 
 const app = new Application();
