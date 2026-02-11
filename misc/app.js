@@ -108,21 +108,6 @@ Application.prototype.start = function () {
 Application.prototype.update = function (note) {
   this.notes.update(note);
   this.meter.update((note.cents / 50) * 45);
-  // Update centered blurred halo color based on proximity (cents)
-  try {
-    const body = document.body;
-    const centsAbs = Math.abs(note.cents || 0);
-    body.classList.remove("halo-closest", "halo-near", "halo-far");
-    if (centsAbs <= 3) {
-      body.classList.add("halo-closest");
-    } else if (centsAbs <= 15) {
-      body.classList.add("halo-near");
-    } else {
-      body.classList.add("halo-far");
-    }
-  } catch (e) {
-    // ignore
-  }
 };
 
 Application.prototype.startTuner = function () {
