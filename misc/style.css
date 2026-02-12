@@ -413,7 +413,7 @@ body {
 }
 
 .a4-value {
-  color: var(--text-muted);
+  color: #393A3C;
   white-space: nowrap;
   font-size: 16px;
 }
