@@ -204,12 +204,12 @@ body {
   position: absolute;
   right: 6px;
   font-size: 40%;
-  color: var(--text-muted);
+  /* color: var(--text-muted); */
 }
 
-.note.active span {
+/* .note.active span {
   color: var(--indicator-color, #393A3C);
-}
+} */
 
 .note-sharp {
   top: 4px;
@@ -227,10 +227,16 @@ body {
   gap: 12px;
 }
 
+/* when .cents is nested inside .frequency keep its top margin neutral so both sit on one line */
+.frequency .cents {
+  margin-top: 0;
+}
+
 .frequency-value {
   font-size: clamp(48px, 7vw, 72px);
   font-weight: 600;
   line-height: 1;
+  color: var(--indicator-color, var(--text-main));
 }
 
 .frequency-unit {
@@ -244,13 +250,18 @@ body {
   align-items: baseline;
   justify-content: center;
   gap: 10px;
+  color: var(--text-muted);
+}
+
+.cents-label {
   color: #393A3C;
 }
 
 .cents-value {
-  font-size: 32px;
+  /* match frequency value size so both appear equal */
+  font-size: clamp(48px, 7vw, 72px);
   font-weight: 600;
-  /* Use the indicator color variable so note label matches the knob */
+  line-height: 1;
   color: var(--indicator-color, #393A3C);
   min-width: 64px;
   text-align: right;
@@ -266,9 +277,6 @@ body {
 
 .meter-wrap {
   padding: 18px 12px 8px;
-  /* background: rgba(21, 24, 30, 0.8); */
-  /* border-radius: 20px; */
-  /* border: 1px solid var(--card-border); */
 }
 
 .meter {
