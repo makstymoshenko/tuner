@@ -273,7 +273,29 @@ body {
   overflow: visible;
   /* border: 1px solid var(--accent-muted); */
   /* border: 1px solid #141315; */
-  
+  margin-top: 28px;
+}
+
+.meter-label {
+  position: absolute;
+  top: -32px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #393A3C;
+  letter-spacing: 0.05em;
+}
+
+.meter-label-left {
+  left: 0;
+}
+
+.meter-label-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.meter-label-right {
+  right: 0;
 }
 
 .meter-line-progress {
@@ -287,7 +309,7 @@ body {
   top: 4px;
   bottom: 4px;
   width: 2px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgb(30 30 30);
   transform: translateX(-50%);
   border-radius: 2px;
   z-index: 1;
