@@ -235,7 +235,7 @@ body {
 
 .frequency-unit {
   /* font-size: 36%; */
-  color: var(--text-muted);
+  color: #393A3C;
 }
 
 .cents {
@@ -244,7 +244,7 @@ body {
   align-items: baseline;
   justify-content: center;
   gap: 10px;
-  color: var(--text-muted);
+  color: #393A3C;
 }
 
 .cents-value {
