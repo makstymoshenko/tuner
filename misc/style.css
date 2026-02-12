@@ -266,7 +266,8 @@ body {
   margin: 0 auto;
   background: rgba(0, 168, 255, 0.1);
   border-radius: 12px;
-  overflow: hidden;
+  /* allow the indicator's glow to be visible outside the meter bounds */
+  overflow: visible;
   border: 1px solid var(--accent-muted);
 }
 
@@ -284,6 +285,7 @@ body {
   background: rgba(255, 255, 255, 0.08);
   transform: translateX(-50%);
   border-radius: 2px;
+  z-index: 1;
 }
 
 .meter-indicator {
@@ -291,12 +293,13 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   border-radius: 999px;
   background: var(--accent);
   box-shadow: 0 0 12px rgba(0, 168, 255, 0.6);
   transition: left 0.12s linear, transform 0.12s linear, background 0.2s;
+  z-index: 2;
 }
 
 .meter-indicator.in-tune {
