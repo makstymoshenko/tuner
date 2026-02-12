@@ -43,6 +43,17 @@ Application.prototype.start = function () {
     }
   };
 
+  // Prevent clicks or touches on the A4 area from toggling the tuner
+  const $a4Control = document.querySelector('.a4-control');
+  if ($a4Control) {
+    $a4Control.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+    $a4Control.addEventListener('touchstart', (e) => {
+      e.stopPropagation();
+    });
+  }
+
   document.addEventListener("click", (e) => {
     // Ігноруємо клік на кнопки A4
     if (e.target.classList.contains("a4-btn") || e.target.closest(".a4-control")) {
