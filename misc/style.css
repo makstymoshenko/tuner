@@ -271,12 +271,38 @@ body {
 }
 
 .meter-line-progress {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--accent), rgba(0, 168, 255, 0.7));
-  border-radius: 12px;
-  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 20px rgba(0, 168, 255, 0.6);
+  /* Legacy: kept for compatibility if used elsewhere; hidden by default */
+  display: none;
+}
+
+.meter-center-line {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.meter-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(0, 168, 255, 0.6);
+  transition: left 0.12s linear, transform 0.12s linear, background 0.2s;
+}
+
+.meter-indicator.in-tune {
+  background: #7cffc4;
+  box-shadow: 0 0 20px rgba(124, 255, 196, 0.6);
+  transform: translate(-50%, -50%) scale(1.15);
 }
 
 .panel-controls {
