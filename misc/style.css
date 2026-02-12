@@ -343,7 +343,7 @@ body {
   gap: 12px;
   position: fixed;
   bottom: 16px;
-  right: 16px;
+  /* right: 16px; */
 }
 
 .a4 {
