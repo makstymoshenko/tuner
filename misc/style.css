@@ -68,8 +68,8 @@ body {
 }
 
 .tuner-header {
-  padding: 32px 40px 10px;
-  text-align: center;
+  z-index: 60;
+  pointer-events: auto;
 }
 
 .tuner-header .eyebrow {
@@ -120,6 +120,16 @@ body {
   border: none;
   border-radius: 999px;
   padding: 14px 28px;
+/* show pointer cursor when hovering over the control area on pointer-capable devices */
+.panel-controls:hover {
+  cursor: pointer;
+}
+
+/* ensure pointer cursor when hovering the A4 display area */
+.a4-control,
+.a4-value {
+  cursor: pointer;
+}
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -416,6 +426,7 @@ body {
   color: #393A3C;
   white-space: nowrap;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .a4-display {
