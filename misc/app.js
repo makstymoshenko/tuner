@@ -78,6 +78,21 @@ Application.prototype.start = function () {
     handleToggleTuner();
   });
 
+  // Toggle tuner with Space or Enter (ignore when typing in inputs)
+  document.addEventListener('keydown', (e) => {
+    const active = document.activeElement;
+    const isTyping = active && (['INPUT', 'TEXTAREA', 'SELECT'].includes(active.tagName) || active.isContentEditable);
+    if (isTyping) return;
+    // Prevent repeat toggles when holding the key
+    if (e.repeat) return;
+    if (e.code === 'Space' || e.key === ' ' || e.key === 'Spacebar') {
+      e.preventDefault();
+      handleToggleTuner();
+    } else if (e.key === 'Enter') {
+      handleToggleTuner();
+    }
+  });
+
   this.updateToggleButton();
 };
 
