@@ -9,8 +9,9 @@ const Meter = function (selector) {
   // parent panel to expose CSS variable for shared indicator color
   this.$panel = this.$root.closest('.panel-body');
   if (this.$panel) {
-    this.$panel.style.setProperty('--indicator-color', 'var(--accent)');
-    this.$panel.style.setProperty('--indicator-shadow', 'rgba(0, 168, 255, 0.4)');
+    this.$panel.style.setProperty('--indicator-color', '#393A3C');
+    this.$panel.style.setProperty('--indicator-shadow', 'rgba(57, 58, 60, 0.4)');
+    this.$panel.style.setProperty('--indicator-box-shadow', 'rgba(57, 58, 60, 0.6)');
   }
 };
 
@@ -30,12 +31,14 @@ Meter.prototype.update = function (percentage) {
       if (this.$panel) {
         this.$panel.style.setProperty('--indicator-color', '#7cffc4');
         this.$panel.style.setProperty('--indicator-shadow', 'rgba(124, 255, 196, 0.45)');
+        this.$panel.style.setProperty('--indicator-box-shadow', 'rgba(124, 255, 196, 0.6)');
       }
     } else {
       this.$indicator.classList.remove("in-tune");
       if (this.$panel) {
-        this.$panel.style.setProperty('--indicator-color', 'var(--accent)');
-        this.$panel.style.setProperty('--indicator-shadow', 'rgba(0, 168, 255, 0.4)');
+        this.$panel.style.setProperty('--indicator-color', '#393A3C');
+        this.$panel.style.setProperty('--indicator-shadow', 'rgba(57, 58, 60, 0.4)');
+        this.$panel.style.setProperty('--indicator-box-shadow', 'rgba(57, 58, 60, 0.6)');
       }
     }
   }
