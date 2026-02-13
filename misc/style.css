@@ -187,7 +187,7 @@ body {
   color: var(--text-main);
   transform: translateY(-6px) scale(1.05);
   /* text shadow follows indicator shadow color */
-  text-shadow: 0 10px 30px var(--indicator-shadow, rgba(0, 168, 255, 0.4));
+  text-shadow: none;
 }
 
 .note-prev,
@@ -236,7 +236,7 @@ body {
   font-size: clamp(48px, 7vw, 72px);
   font-weight: 600;
   line-height: 1;
-  color: var(--indicator-color, var(--text-main));
+  color: var(--text-main);
 }
 
 .frequency-unit {
@@ -262,17 +262,17 @@ body {
   font-size: clamp(48px, 7vw, 72px);
   font-weight: 600;
   line-height: 1;
-  color: var(--indicator-color, #393A3C);
+  color: var(--text-muted);
   min-width: 64px;
   text-align: right;
 }
 
 .cents-value.is-flat {
-  color: #ff7b5f;
+  color: var(--text-muted);
 }
 
 .cents-value.is-sharp {
-  color: var(--accent);
+  color: var(--text-muted);
 }
 
 .meter-wrap {
@@ -341,15 +341,15 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 999px;
-  background: var(--indicator-color, #393A3C);
-  box-shadow: 0 0 12px var(--indicator-box-shadow, rgba(57, 58, 60, 0.6));
+  background: #393A3C;
+  box-shadow: none;
   transition: left 0.12s linear, transform 0.12s linear, background 0.2s;
   z-index: 2;
 }
 
 .meter-indicator.in-tune {
-  background: var(--indicator-color, #7cffc4);
-  box-shadow: 0 0 20px var(--indicator-box-shadow, rgba(124, 255, 196, 0.6));
+  background: #393A3C;
+  box-shadow: none;
   transform: translate(-50%, -50%) scale(1.15);
 }
 
